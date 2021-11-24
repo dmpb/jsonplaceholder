@@ -35,8 +35,8 @@ class CommentController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $post)
+    public function show(Comment $comment)
     {
-        return new CommentResource($post);
+        return new CommentResource($comment);
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\UserController;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,28 +20,24 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    $usersQuantity = User::count();
+    $postsQuantity = Post::count();
+    $commentsQuantity = Comment::count();
+    $todosQuantity = Todo::count();
+
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'canLogin'          => Route::has('login'),
+        'canRegister'       => Route::has('register'),
+        'laravelVersion'    => Application::VERSION,
+        'phpVersion'        => PHP_VERSION,
+        'usersQuantity'     => $usersQuantity,
+        'postsQuantity'     => $postsQuantity,
+        'commentsQuantity'  => $commentsQuantity,
+        'todosQuantity'      => $todosQuantity,
+        'url'               => route('welcome'),
     ]);
-});
+})->name('welcome');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
-
-// Users
-Route::get('users', [UserController::class, 'index'])->name('users.index');
-Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
-
-// Posts
-Route::get('posts', [PostController::class, 'all'])->name('posts.all');
-Route::get('users/{user}/posts', [PostController::class, 'index'])->name('users.posts.index');
-Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
-
-// Comments
-Route::get('comments', [CommentController::class, 'all'])->name('comments.all');
-Route::get('posts/{post}/comments', [CommentController::class, 'index'])->name('posts.comments.index');
-Route::get('comments/{comment}', [CommentController::class, 'show'])->name('comments.show');

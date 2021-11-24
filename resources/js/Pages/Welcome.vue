@@ -47,7 +47,7 @@
                 :code="tryitCode"
             ></Highlightjs>
             <button
-                class="px-3 py-2 mb-6 text-white bg-green-500 rounded-md hover:bg-green-400"
+                class="px-3 py-2 mb-6 text-white bg-green-500 rounded-md  hover:bg-green-400"
                 @click="changeTryitResultCode()"
             >
                 Run script
@@ -64,7 +64,7 @@
         <div class="container mx-auto">
             <h2 class="text-2xl font-bold">Resources</h2>
             <p class="mb-4">
-                JSONPlaceholder comes with a set of 6 common resources:
+                JSONPlaceholder comes with a set of 4 common resources:
             </p>
             <table class="table-auto">
                 <thead>
@@ -76,33 +76,39 @@
                 <tbody>
                     <tr>
                         <td>
-                            <Link
+                            <a
                                 :href="route('users.index')"
                                 class="text-blue-600"
-                                >/users</Link
+                                >/users</a
                             >
                         </td>
-                        <td>10 users</td>
+                        <td>{{ usersQuantity }} users</td>
                     </tr>
                     <tr>
                         <td>
-                            <Link
-                                :href="route('posts.all')"
-                                class="text-blue-600"
-                                >/posts</Link
+                            <a :href="route('posts.all')" class="text-blue-600"
+                                >/posts</a
                             >
                         </td>
-                        <td>100 posts</td>
+                        <td>{{ postsQuantity }} posts</td>
                     </tr>
                     <tr>
                         <td>
-                            <Link
+                            <a
                                 :href="route('comments.all')"
                                 class="text-blue-600"
-                                >/comments</Link
+                                >/comments</a
                             >
                         </td>
-                        <td>500 comments</td>
+                        <td>{{ commentsQuantity }} comments</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a :href="route('todos.all')" class="text-blue-600"
+                                >/todos</a
+                            >
+                        </td>
+                        <td>{{ todosQuantity }} todos</td>
                     </tr>
                 </tbody>
             </table>
@@ -112,10 +118,7 @@
     <div class="px-3 my-16">
         <div class="container mx-auto">
             <h2 class="text-2xl font-bold">Routes</h2>
-            <p class="mb-4">
-                All HTTP methods are supported. You can use http or https for
-                your requests.
-            </p>
+            <p class="mb-4">All HTTP methods are supported.</p>
             <table class="table-auto">
                 <thead>
                     <tr>
@@ -125,33 +128,43 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>GET</td>
+                        <td class="font-bold text-green-500">GET</td>
                         <td>
-                            <Link
+                            <a
                                 :href="route('users.index')"
                                 class="text-blue-600"
-                                >/users</Link
+                                >/users</a
                             >
                         </td>
                     </tr>
                     <tr>
-                        <td>GET</td>
+                        <td class="font-bold text-green-500">GET</td>
                         <td>
-                            <Link
-                                :href="route('users.show', { user: 1 })"
+                            <a
+                                :href="
+                                    route('posts.comments.index', { post: 1 })
+                                "
                                 class="text-blue-600"
-                                >/users/1</Link
+                                >/posts/1/comments</a
                             >
                         </td>
                     </tr>
                     <tr>
-                        <td>GET</td>
+                        <td class="font-bold text-yellow-500">POST</td>
                         <td>
-                            <Link
-                                :href="route('posts.comments.index', { post: 1 })"
-                                class="text-blue-600"
-                                >/posts/1/comments</Link
-                            >
+                            <p>/users/1/todos</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-blue-500">PUT</td>
+                        <td>
+                            <p>/todos/1</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold text-red-500">DELETE</td>
+                        <td>
+                            <p>/todos/1</p>
                         </td>
                     </tr>
                 </tbody>
@@ -189,11 +202,15 @@ export default defineComponent({
         laravelVersion: String,
         phpVersion: String,
         user: Object,
+        usersQuantity: Number,
+        postsQuantity: Number,
+        commentsQuantity: Number,
+        todosQuantity: Number,
+        url: String,
     },
 
-    setup() {
-        const tryitCode =
-            ref(`fetch('https://jsonplaceholder.typicode.com/todos/1')
+    setup(props) {
+        const tryitCode = ref(`fetch('${props.url}/todos/1')
   .then(response => response.json())
   .then(json => console.log(json))`);
 
@@ -201,10 +218,13 @@ export default defineComponent({
 
         const changeTryitResultCode = () => {
             tryitResultCode.value = `{
-	"userId": 1,
-	"id": 1,
-	"title": "delectus aut autem",
-	"completed": false
+    "data": {
+        "id": 13,
+        "user_id": 14,
+        "title": "Amet enim mollitia rem.",
+        "completed": 1,
+        "created_at": "2021-11-24T14:12:25.000000Z"
+    }
 }`;
         };
 
