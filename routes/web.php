@@ -32,15 +32,15 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 // Users
-Route::get('users', [UserController::class, 'index']);
-Route::get('users/{user}', [UserController::class, 'show']);
+Route::get('users', [UserController::class, 'index'])->name('users.index');
+Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
 
 // Posts
-Route::get('posts', [PostController::class, 'all']);
-Route::get('users/{user}/posts', [PostController::class, 'index']);
-Route::get('posts/{post}', [PostController::class, 'show']);
+Route::get('posts', [PostController::class, 'all'])->name('posts.all');
+Route::get('users/{user}/posts', [PostController::class, 'index'])->name('users.posts.index');
+Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 // Comments
-Route::get('comments', [CommentController::class, 'all']);
-Route::get('posts/{post}/comments', [CommentController::class, 'index']);
-Route::get('comments/{comment}', [CommentController::class, 'show']);
+Route::get('comments', [CommentController::class, 'all'])->name('comments.all');
+Route::get('posts/{post}/comments', [CommentController::class, 'index'])->name('posts.comments.index');
+Route::get('comments/{comment}', [CommentController::class, 'show'])->name('comments.show');

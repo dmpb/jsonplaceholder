@@ -1,7 +1,7 @@
 <template>
     <Head title="Welcome" />
 
-    <div class="px-2 bg-white md:px-0">
+    <div class="px-3 bg-white">
         <div class="container relative flex justify-between py-5 mx-auto">
             <h1 class="font-bold text-blue-600">JSONPlaceholder</h1>
             <div class="flex" v-if="canLogin">
@@ -10,6 +10,7 @@
                     :href="route('dashboard')"
                     class="text-blue-600"
                 >
+                    {{ user.name }}
                 </Link>
                 <template v-else>
                     <Link :href="route('login')" class="text-blue-600">
@@ -19,7 +20,7 @@
             </div>
         </div>
     </div>
-    <div class="px-2 bg-blue-600 py-36 md:px-0">
+    <div class="px-3 bg-blue-600 py-36">
         <div class="container mx-auto">
             <p class="mb-8 text-6xl font-bold text-white">
                 <span>{JSON}</span> <span>Placeholder</span>
@@ -34,7 +35,7 @@
         </div>
     </div>
 
-    <div class="px-2 my-16 bg-white md:px-0">
+    <div class="px-3 my-16 bg-white">
         <div class="container mx-auto">
             <h2 class="text-2xl font-bold">Try it</h2>
             <p class="mb-4">
@@ -59,7 +60,7 @@
         </div>
     </div>
 
-    <div class="px-2 my-16 md:px-0">
+    <div class="px-3 my-16">
         <div class="container mx-auto">
             <h2 class="text-2xl font-bold">Resources</h2>
             <p class="mb-4">
@@ -75,30 +76,40 @@
                 <tbody>
                     <tr>
                         <td>
-                            <Link href="/" class="text-blue-600">/posts</Link>
+                            <Link
+                                :href="route('users.index')"
+                                class="text-blue-600"
+                                >/users</Link
+                            >
+                        </td>
+                        <td>10 users</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Link
+                                :href="route('posts.all')"
+                                class="text-blue-600"
+                                >/posts</Link
+                            >
                         </td>
                         <td>100 posts</td>
                     </tr>
                     <tr>
                         <td>
-                            <Link href="/" class="text-blue-600"
+                            <Link
+                                :href="route('comments.all')"
+                                class="text-blue-600"
                                 >/comments</Link
                             >
                         </td>
                         <td>500 comments</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <Link href="/" class="text-blue-600">/users</Link>
-                        </td>
-                        <td>10 users</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div class="px-2 my-16 md:px-0">
+    <div class="px-3 my-16">
         <div class="container mx-auto">
             <h2 class="text-2xl font-bold">Routes</h2>
             <p class="mb-4">
@@ -116,23 +127,39 @@
                     <tr>
                         <td>GET</td>
                         <td>
-                            <Link href="/" class="text-blue-600">/posts</Link>
+                            <Link
+                                :href="route('users.index')"
+                                class="text-blue-600"
+                                >/users</Link
+                            >
                         </td>
                     </tr>
                     <tr>
-                        <td>POST</td>
-                        <td>/comments</td>
+                        <td>GET</td>
+                        <td>
+                            <Link
+                                :href="route('users.show', { user: 1 })"
+                                class="text-blue-600"
+                                >/users/1</Link
+                            >
+                        </td>
                     </tr>
                     <tr>
-                        <td>PUT</td>
-                        <td>/users/1</td>
+                        <td>GET</td>
+                        <td>
+                            <Link
+                                :href="route('posts.comments.index', { post: 1 })"
+                                class="text-blue-600"
+                                >/posts/1/comments</Link
+                            >
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 
-    <footer class="px-2 py-4 text-center">
+    <footer class="px-3 py-4 text-center">
         <p>Created with ❤️ by Daniel Ponce</p>
         <a
             href="https://github.com/dmpb"
@@ -161,6 +188,7 @@ export default defineComponent({
         canRegister: Boolean,
         laravelVersion: String,
         phpVersion: String,
+        user: Object,
     },
 
     setup() {
