@@ -25,7 +25,7 @@
             <p class="mb-8 text-6xl font-bold text-white">
                 <span>{JSON}</span> <span>Placeholder</span>
             </p>
-            <p class="mb-2 text-xl text-white">The word manages the data.</p>
+            <p class="mb-2 text-xl text-white">The world is managed by data.</p>
             <p class="mb-4 text-xl text-white">
                 We provide you with false data for your tests.
             </p>
@@ -47,7 +47,7 @@
                 :code="tryitCode"
             ></Highlightjs>
             <button
-                class="px-3 py-2 mb-6 text-white bg-green-500 rounded-md  hover:bg-green-400"
+                class="px-3 py-2 mb-6 text-white bg-green-500 rounded-md hover:bg-green-400"
                 @click="changeTryitResultCode()"
             >
                 Run script
