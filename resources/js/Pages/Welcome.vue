@@ -172,6 +172,22 @@
         </div>
     </div>
 
+    <div class="px-3 my-16">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold">Documentation</h2>
+            <p class="mb-4">
+                To know all the documentation of the routes you can see our
+                repository in
+                <a
+                    target="_blank"
+                    class="text-yellow-500 hover:text-yellow-400"
+                    href="https://documenter.getpostman.com/view/8414406/UVJZoJ7f"
+                    >Postman</a
+                >.
+            </p>
+        </div>
+    </div>
+
     <footer class="px-3 py-4 text-center">
         <p>Created with ❤️ by Daniel Ponce</p>
         <a
@@ -210,7 +226,7 @@ export default defineComponent({
     },
 
     setup(props) {
-        const tryitCode = ref(`fetch('${props.url}/todos/1')
+        const tryitCode = ref(`fetch('${props.url}/api/todos/1')
   .then(response => response.json())
   .then(json => console.log(json))`);
 
