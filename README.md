@@ -1,4 +1,5 @@
 [![Logo banner](https://jsonplaceholder-v1.herokuapp.com/images/logo_banner.png "Logo banner")](https://jsonplaceholder-v1.herokuapp.com/ "Logo banner")
+[Demo](https://jsonplaceholder-v1.herokuapp.com/ "Demo")
 ## :rocket: Resources
 JSONPlaceholder comes with a set of 4 common resources:
 
